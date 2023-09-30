@@ -10,6 +10,7 @@ import androidx.annotation.RequiresApi
 import br.com.antoniojoseuchoa.appplaceholderapi.R
 import br.com.antoniojoseuchoa.appplaceholderapi.data.model.Foto
 import br.com.antoniojoseuchoa.appplaceholderapi.databinding.ActivityDetailPhotoBinding
+import br.com.antoniojoseuchoa.appplaceholderapi.domain.models.FotoDomain
 import com.squareup.picasso.Picasso
 
 class DetailPhotoActivity : AppCompatActivity() {
@@ -17,7 +18,6 @@ class DetailPhotoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
 
 
 
@@ -37,7 +37,7 @@ class DetailPhotoActivity : AppCompatActivity() {
 
         if(bundle != null){
             val foto = if(VERSION.SDK_INT >= VERSION_CODES.TIRAMISU){
-                bundle?.getParcelable("photo", Foto::class.java)
+                bundle?.getParcelable("photo", FotoDomain::class.java)
             }else{
                 bundle.getParcelable("photo")
             }

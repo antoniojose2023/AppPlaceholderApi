@@ -5,16 +5,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.antoniojoseuchoa.appplaceholderapi.data.model.Foto
-import br.com.antoniojoseuchoa.appplaceholderapi.data.repository.RepositoryFotos
+import br.com.antoniojoseuchoa.appplaceholderapi.domain.models.FotoDomain
+import br.com.antoniojoseuchoa.appplaceholderapi.domain.repository.RepositoryFotos
+import br.com.antoniojoseuchoa.appplaceholderapi.domain.usecase.UseCasePhoto
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ViewModelPhotos @Inject constructor(private val repositoryFotos: RepositoryFotos): ViewModel() {
+class ViewModelPhotos @Inject constructor(private val useCasePhoto: UseCasePhoto): ViewModel() {
 
-    private var _fotos = MutableLiveData<List<Foto>>()
-    val fotos: LiveData<List<Foto>> = _fotos
+    private var _fotos = MutableLiveData<List<FotoDomain>>()
+    val fotos: LiveData<List<FotoDomain>> = _fotos
 
 //    init {
 //        getAllPhotos()
@@ -22,7 +24,7 @@ class ViewModelPhotos @Inject constructor(private val repositoryFotos: Repositor
 
     fun getAllPhotos(){
         viewModelScope.launch {
-            val photos = repositoryFotos.getFotos()
+            val photos = useCasePhoto()
             _fotos.postValue( photos )
         }
     }
