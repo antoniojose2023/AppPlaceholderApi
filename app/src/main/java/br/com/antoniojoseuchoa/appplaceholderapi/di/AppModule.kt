@@ -1,8 +1,9 @@
 package br.com.antoniojoseuchoa.appplaceholderapi.di
 
 import br.com.antoniojoseuchoa.appplaceholderapi.data.api.ApiPlaceHolder
-import br.com.antoniojoseuchoa.appplaceholderapi.data.repository.RepositoryFotos
+import br.com.antoniojoseuchoa.appplaceholderapi.domain.repository.RepositoryFotos
 import br.com.antoniojoseuchoa.appplaceholderapi.data.repository.RepositoryFotosImpl
+import br.com.antoniojoseuchoa.appplaceholderapi.domain.usecase.UseCasePhoto
 import br.com.antoniojoseuchoa.appplaceholderapi.util.Utils
 import dagger.Module
 import dagger.Provides
@@ -29,8 +30,12 @@ object AppModule {
     }
 
     @Provides
-    fun providesRepositoryPhotos(apiPlaceHolder: ApiPlaceHolder): RepositoryFotos{
+    fun providesRepositoryPhotos(apiPlaceHolder: ApiPlaceHolder): RepositoryFotos {
         return RepositoryFotosImpl(apiPlaceHolder)
     }
 
+    @Provides
+    fun providesUseCasePhotos(repositoryFotos: RepositoryFotos): UseCasePhoto {
+        return UseCasePhoto( repositoryFotos )
+    }
 }

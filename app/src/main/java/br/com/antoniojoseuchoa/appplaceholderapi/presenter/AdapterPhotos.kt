@@ -6,13 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.antoniojoseuchoa.appplaceholderapi.data.model.Foto
 import br.com.antoniojoseuchoa.appplaceholderapi.databinding.ItemPhotoBinding
+import br.com.antoniojoseuchoa.appplaceholderapi.domain.models.FotoDomain
 import br.com.antoniojoseuchoa.appplaceholderapi.presenter.ui.DetailPhotoActivity
 
 class AdapterPhotos(): RecyclerView.Adapter<AdapterPhotos.ViewHolderPhoto>() {
 
-    private var list = listOf<Foto>()
+    private var list = listOf<FotoDomain>()
 
-    fun setListPhotos(list: List<Foto>){
+    fun setListPhotos(list: List<FotoDomain>){
          this.list = list
     }
 
@@ -30,7 +31,7 @@ class AdapterPhotos(): RecyclerView.Adapter<AdapterPhotos.ViewHolderPhoto>() {
     }
 
     inner class ViewHolderPhoto(val binding: ItemPhotoBinding): RecyclerView.ViewHolder(binding.root){
-         fun bind(item: Foto){
+         fun bind(item: FotoDomain){
              binding.tvTitulo.text = item.title
 
              binding.itemPhoto.setOnClickListener {
